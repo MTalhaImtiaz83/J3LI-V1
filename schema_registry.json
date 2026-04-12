@@ -1,0 +1,169 @@
+{
+  "version": "0.1.0",
+  "generated_at": "2026-04-03T15:45:00Z",
+  "sprint1_validated": true,
+  "sprint1_counts": {
+    "Surah": 1,
+    "Verse": 3,
+    "TafsirEntry": 3,
+    "Scholar": 1,
+    "relationships": 11,
+    "vectors": 6
+  },
+  "description": "J3LI Schema Registry — auto-generated contract between ingestion, API, and frontend",
+  "node_types": {
+    "Surah": {
+      "properties": {
+        "id": "INT",
+        "name_arabic": "STRING",
+        "name_english": "STRING",
+        "name_transliteration": "STRING",
+        "revelation_type": "STRING",
+        "verse_count": "INT"
+      },
+      "required": ["id", "name_arabic", "name_english"]
+    },
+    "Verse": {
+      "properties": {
+        "id": "STRING",
+        "surah_id": "INT",
+        "ayah_number": "INT",
+        "text_uthmani": "STRING",
+        "text_simple": "STRING",
+        "text_english": "STRING",
+        "juz": "INT",
+        "hizb": "INT",
+        "page": "INT",
+        "sajda": "BOOLEAN",
+        "milvus_id": "STRING",
+        "word_count": "INT",
+        "has_asbab_nuzul": "BOOLEAN"
+      },
+      "required": ["id", "surah_id", "ayah_number", "text_uthmani"]
+    },
+    "Hadith": {
+      "properties": {
+        "id": "STRING",
+        "collection": "STRING",
+        "book": "STRING",
+        "chapter": "STRING",
+        "number": "INT",
+        "text_arabic": "STRING",
+        "text_english": "STRING",
+        "grade": "STRING",
+        "grading_scholar": "STRING",
+        "milvus_id": "STRING"
+      },
+      "required": ["id", "collection", "text_arabic"]
+    },
+    "TafsirEntry": {
+      "properties": {
+        "id": "STRING",
+        "tafsir_name": "STRING",
+        "scholar_id": "STRING",
+        "verse_id": "STRING",
+        "text_arabic": "STRING",
+        "text_english": "STRING",
+        "milvus_id": "STRING"
+      },
+      "required": ["id", "tafsir_name", "verse_id"]
+    },
+    "Scholar": {
+      "properties": {
+        "id": "STRING",
+        "name_arabic": "STRING",
+        "name_english": "STRING",
+        "era": "STRING",
+        "school": "STRING",
+        "methodology": "STRING"
+      },
+      "required": ["id", "name_english"]
+    },
+    "Narrator": {
+      "properties": {
+        "id": "STRING",
+        "name_arabic": "STRING",
+        "name_english": "STRING",
+        "generation": "STRING",
+        "reliability_grade": "STRING"
+      },
+      "required": ["id", "name_arabic"]
+    },
+    "SeerahEvent": {
+      "properties": {
+        "id": "STRING",
+        "title_english": "STRING",
+        "title_arabic": "STRING",
+        "description": "STRING",
+        "year_hijri": "INT",
+        "year_ce": "INT",
+        "category": "STRING",
+        "seerah_period": "STRING"
+      },
+      "required": ["id", "title_english"]
+    },
+    "Topic": {
+      "properties": {
+        "id": "STRING",
+        "name_arabic": "STRING",
+        "name_english": "STRING",
+        "category": "STRING"
+      },
+      "required": ["id", "name_english"]
+    },
+    "Root": {
+      "properties": {
+        "id": "STRING",
+        "transliteration": "STRING",
+        "core_meaning": "STRING",
+        "occurrences_count": "INT"
+      },
+      "required": ["id"]
+    },
+    "Word": {
+      "properties": {
+        "id": "STRING",
+        "verse_id": "STRING",
+        "position": "INT",
+        "text_uthmani": "STRING",
+        "root": "STRING",
+        "lemma": "STRING",
+        "pos_tag": "STRING",
+        "morphology": "STRING"
+      },
+      "required": ["id", "verse_id", "position"]
+    }
+  },
+  "relationship_types": {
+    "BELONGS_TO": {"from": "Verse", "to": "Surah"},
+    "NEXT_VERSE": {"from": "Verse", "to": "Verse"},
+    "PART_OF": {"from": "Word", "to": "Verse"},
+    "HAS_ROOT": {"from": "Word", "to": "Root"},
+    "REFERENCES": {"from": "Hadith", "to": "Verse"},
+    "CONTEXT_FOR": {"from": "SeerahEvent", "to": "Verse"},
+    "EXPLAINED_BY": {"from": "Verse", "to": "TafsirEntry"},
+    "AUTHORED_BY": {"from": "TafsirEntry", "to": "Scholar"},
+    "NARRATED": {"from": "Narrator", "to": "Hadith"},
+    "HEARD_FROM": {"from": "Narrator", "to": "Narrator"},
+    "DISCUSSES": {"from": "Verse", "to": "Topic"},
+    "RELATED_TO": {"from": "Verse", "to": "Verse"},
+    "CITES": {"from": "TafsirEntry", "to": "Hadith"}
+  },
+  "milvus_collections": {
+    "j3li_verses": {
+      "dimension": 1024,
+      "metric_type": "COSINE",
+      "description": "Verse embeddings from intfloat/multilingual-e5-large"
+    },
+    "j3li_hadiths": {
+      "dimension": 1024,
+      "metric_type": "COSINE",
+      "description": "Hadith text embeddings"
+    },
+    "j3li_tafsir": {
+      "dimension": 1024,
+      "metric_type": "COSINE",
+      "description": "Tafsir entry embeddings"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+Python: C:\Python314\python.exe
+Version: 3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]
+CWD: C:\Users\mtalh\OneDrive\Desktop\Just-3-like-it
+Script dir: C:\Users\mtalh\OneDrive\Desktop\Just-3-like-it
+sys.path: ['C:\\Users\\mtalh\\OneDrive\\Desktop\\Just-3-like-it', 'C:\\Python314\\python314.zip', 'C:\\Python314\\DLLs', 'C:\\Python314\\Lib', 'C:\\Python314', 'C:\\Users\\mtalh\\AppData\\Roaming\\Python\\Python314\\site-packages', 'C:\\Python314\\Lib\\site-packages']
+
+Importing uvicorn...
+  uvicorn OK: 0.43.0
+Importing fastapi...
+  fastapi OK: 0.135.3
+Importing j3li.api.main...
+  j3li.api.main OK
+
+All checks done.

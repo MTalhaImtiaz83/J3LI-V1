@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+
+# Environment
+.env
+
+# Data (local only)
+data/wal.db
+data/wal.db-wal
+data/wal.db-shm
+
+# IDE
+.vscode/
+.idea/
+
+# Docker volumes
+neo4j-data/
+milvus-data/
+etcd-data/
+minio-data/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model cache
+*.onnx
+*.bin
+*.safetensors

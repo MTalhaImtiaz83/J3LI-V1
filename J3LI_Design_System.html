@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J3LI — Unified Brand Design System</title>
+<meta name="description" content="Just Three Like It — Complete Brand Design System. Islamic Digital Scholarship Technology.">
+
+<!-- Fonts: Geist for Latin UI, Amiri for Arabic/Quranic, JetBrains Mono for code -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS — J3LI Brand System
+   ═══════════════════════════════════════════ */
+:root {
+  /* Brand Palette */
+  --bahri: #0A1628;
+  --dhahab: #C9A84C;
+  --noor: #FAFAF8;
+  --zumurrud: #1B6B4A;
+  --anbar: #D4853B;
+  --silah: #2E86AB;
+  --layl: #0D1F3C;
+  --tib: #E8D9A0;
+
+  /* Neutrals */
+  --n900: #111111;
+  --n700: #3D4852;
+  --n500: #6B7B8D;
+  --n300: #B0BEC5;
+  --n100: #F0EDE4;
+  --n50: #FAFAF8;
+
+  /* Semantic */
+  --success: #1B6B4A;
+  --warning: #D4853B;
+  --error: #C0392B;
+  --info: #2E86AB;
+
+  /* Shadows — tinted to navy */
+  --shadow-1: 0 1px 3px rgba(10,22,40,0.08);
+  --shadow-2: 0 4px 12px rgba(10,22,40,0.12);
+  --shadow-3: 0 8px 24px rgba(10,22,40,0.16);
+  --shadow-4: 0 16px 48px rgba(10,22,40,0.24);
+  --glow-gold: 0 0 20px rgba(201,168,76,0.25);
+  --glow-blue: 0 0 20px rgba(46,134,171,0.2);
+
+  /* Motion */
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --ease-graph: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* Type Scale — Major Third (1.25) */
+  --fs-display-lg: clamp(2.5rem, 5vw, 3.052rem);
+  --fs-display: clamp(2rem, 4vw, 2.441rem);
+  --fs-h1: clamp(1.6rem, 3vw, 1.953rem);
+  --fs-h2: clamp(1.3rem, 2.5vw, 1.563rem);
+  --fs-h3: 1.25rem;
+  --fs-body-lg: 1.125rem;
+  --fs-body: 1rem;
+  --fs-body-sm: 0.875rem;
+  --fs-caption: 0.75rem;
+  --fs-overline: 0.6875rem;
+}
+
+/* ═══════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-numeric: tabular-nums;
+}
+
+body {
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  color: var(--n900);
+  background: var(--noor);
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   NOISE TEXTURE OVERLAY
+   ═══════════════════════════════════════════ */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ═══════════════════════════════════════════
+   LAYOUT CONTAINERS
+   ═══════════════════════════════════════════ */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+.container--narrow {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+/* ═══════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════ */
+h1, h2, h3, h4 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--bahri);
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--fs-display-lg); font-weight: 800; }
+h2 { font-size: var(--fs-h1); margin-bottom: 1rem; }
+h3 { font-size: var(--fs-h2); margin-bottom: 0.75rem; }
+h4 { font-size: var(--fs-h3); font-weight: 600; margin-bottom: 0.5rem; }
+
+p {
+  max-width: 65ch;
+  margin-bottom: 1rem;
+  color: var(--n700);
+  text-wrap: pretty;
+}
+
+.overline {
+  font-size: var(--fs-overline);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dhahab);
+}
+
+.arabic-display {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.8;
+  direction: rtl;
+  color: var(--bahri);
+}
+
+.arabic-sm {
+  font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+  font-size: var(--fs-body);
+  line-height: 1.8;
+  direction: rtl;
+}
+
+code, .mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875em;
+}
+
+/* ═══════════════════════════════════════════
+   HERO / COVER
+   ═══════════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--bahri);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 40%, rgba(46,134,171,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,168,76,0.08) 0%, transparent 60%);
+  z-index: 1;
+}
+
+/* Graph node dots — ambient */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.3;
+  background-image:
+    radial-gradient(circle 2px at 15% 20%, var(--silah) 100%, transparent 100%),
+    radial-gradient(circle 1.5px at 35% 65%, var(--dhahab) 100%, transparent 100%),
+    radial-gradient(circle 2px at 55% 30%, var(--silah) 100%, transparent 100%),
+    radial-gradient(circle 1px at 72% 75%, var(--dhahab) 100%, transparent 100%),
+    radial-gradient(circle 2.5px at 85% 15%, var(--silah) 100%, transparent 100%),
+    radial-gradient(circle 1.5px at 28% 85%, var(--silah) 100%, transparent 100%),
+    radial-gradient(circle 1px at 90% 55%, var(--dhahab) 100%, transparent 100%),
+    radial-gradient(circle 2px at 48% 90%, var(--silah) 100%, transparent 100%),
+    radial-gradient(circle 1.5px at 8% 50%, var(--dhahab) 100%, transparent 100%),
+    radial-gradient(circle 1px at 62% 12%, var(--silah) 100%, transparent 100%);
+  background-size: 100% 100%;
+  animation: drift 30s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-8px, 6px) scale(1.02); }
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+  max-width: 900px;
+}
+
+.hero__numeral {
+  display: inline-block;
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(5rem, 12vw, 9rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--dhahab);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-enter) 0.2s forwards;
+}
+
+.hero__title {
+  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--noor);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-enter) 0.4s forwards;
+}
+
+.hero__subtitle {
+  font-size: var(--fs-body-lg);
+  font-weight: 400;
+  color: var(--n300);
+  max-width: 55ch;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-enter) 0.6s forwards;
+}
+
+.hero__arabic {
+  font-family: 'Amiri', serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  color: var(--tib);
+  direction: rtl;
+  line-height: 2;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease-enter) 0.8s forwards;
+}
+
+.hero__arabic-sub {
+  font-size: var(--fs-body-sm);
+  color: var(--n500);
+  font-style: italic;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease-enter) 1s forwards;
+}
+
+.hero__meta {
+  margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease-enter) 1.1s forwards;
+}
+
+.hero__meta-item {
+  font-size: var(--fs-caption);
+  font-weight: 500;
+  color: var(--n500);
+  letter-spacing: 0.05em;
+}
+
+.hero__meta-item span {
+  color: var(--dhahab);
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════
+   NAVIGATION — sticky sidebar TOC
+   ═══════════════════════════════════════════ */
+.layout-wrapper {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 0;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1023px) {
+  .layout-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .sidebar { display: none; }
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow-y: auto;
+  padding: 2rem 1.5rem 2rem 2rem;
+  border-right: 1px solid var(--n100);
+  background: var(--noor);
+  scrollbar-width: thin;
+  scrollbar-color: var(--n300) transparent;
+}
+
+.sidebar__brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  text-decoration: none;
+}
+
+.sidebar__three {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--dhahab);
+  line-height: 1;
+}
+
+.sidebar__wordmark {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bahri);
+}
+
+.sidebar__label {
+  font-size: var(--fs-overline);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--n500);
+  margin-bottom: 0.75rem;
+}
+
+.sidebar__nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar__link {
+  display: block;
+  padding: 0.4rem 0.75rem;
+  font-size: var(--fs-body-sm);
+  font-weight: 400;
+  color: var(--n700);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.2s var(--ease-default);
+}
+
+.sidebar__link:hover {
+  background: var(--n100);
+  color: var(--bahri);
+}
+
+.sidebar__link--active {
+  background: rgba(201,168,76,0.1);
+  color: var(--bahri);
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════
+   MAIN CONTENT AREA
+   ═══════════════════════════════════════════ */
+.main {
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3.5rem);
+  min-height: 100dvh;
+}
+
+/* ═══════════════════════════════════════════
+   SECTIONS
+   ═══════════════════════════════════════════ */
+.section {
+  margin-bottom: clamp(4rem, 8vw, 6rem);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s var(--ease-enter), transform 0.6s var(--ease-enter);
+}
+
+.section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section__header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--bahri);
+  position: relative;
+}
+
+.section__header::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 80px;
+  height: 2px;
+  background: var(--dhahab);
+}
+
+.section__number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-caption);
+  font-weight: 500;
+  color: var(--dhahab);
+  letter-spacing: 0.1em;
+}
+
+/* ═══════════════════════════════════════════
+   SUBSECTIONS
+   ═══════════════════════════════════════════ */
+.subsection {
+  margin-bottom: 3rem;
+}
+
+.subsection__title {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  color: var(--bahri);
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--dhahab);
+}
+
+/* ═══════════════════════════════════════════
+   COLOR SWATCHES
+   ═══════════════════════════════════════════ */
+.swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.swatch {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-1);
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s var(--ease-default);
+}
+
+.swatch:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-2);
+}
+
+.swatch__color {
+  height: 100px;
+  position: relative;
+}
+
+.swatch__info {
+  padding: 0.75rem 1rem;
+  background: white;
+}
+
+.swatch__name {
+  font-weight: 600;
+  font-size: var(--fs-body-sm);
+  color: var(--bahri);
+  margin-bottom: 0.2rem;
+}
+
+.swatch__hex {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--fs-caption);
+  color: var(--n500);
+}
+
+/* ═══════════════════════════════════════════
+   TABLES
+   ═══════════════════════════════════════════ */
+.table-wrap {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border-radius: 10px;
+  border: 1px solid var(--n100);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-body-sm);
+}
+
+thead {
+  background: var(--bahri);
+}
+
+thead th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: var(--fs-caption);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--noor);
+  white-space: nowrap;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--n100);
+  transition: background 0.15s var(--ease-default);
+}
+
+tbody tr:last-child { border-bottom: none; }
+
+tbody tr:hover {
+  background: rgba(201,168,76,0.04);
+}
+
+tbody td {
+  padding: 0.65rem 1rem;
+  color: var(--n700);
+  vertical-align: top;
+}
+
+tbody td:first-child {
+  font-weight: 500;
+  color: var(--bahri);
+}
+
+/* ═══════════════════════════════════════════
+   CARDS — minimal, no border
+   ═══════════════════════════════════════════ */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.card {
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow-1);
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s var(--ease-default);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+}
+
+.card__label {
+  font-size: var(--fs-overline);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dhahab);
+  margin-bottom: 0.5rem;
+}
+
+.card__title {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  color: var(--bahri);
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+
+.card__body {
+  font-size: var(--fs-body-sm);
+  color: var(--n700);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════
+   TONE EXAMPLES — DO / DON'T
+   ═══════════════════════════════════════════ */
+.tone-example {
+  margin: 1rem 0;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  font-size: var(--fs-body-sm);
+  line-height: 1.6;
+}
+
+.tone-example--do {
+  background: rgba(27,107,74,0.06);
+  border-left: 3px solid var(--zumurrud);
+  color: var(--n700);
+}
+
+.tone-example--dont {
+  background: rgba(192,57,43,0.05);
+  border-left: 3px solid var(--error);
+  color: var(--n500);
+  text-decoration: line-through;
+  text-decoration-color: rgba(192,57,43,0.3);
+}
+
+.tone-example__label {
+  font-weight: 600;
+  font-size: var(--fs-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+  text-decoration: none;
+}
+
+.tone-example--do .tone-example__label { color: var(--zumurrud); }
+.tone-example--dont .tone-example__label { color: var(--error); }
+
+/* ═══════════════════════════════════════════
+   TOKEN CODE BLOCKS
+   ═══════════════════════════════════════════ */
+.code-block {
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background: var(--layl);
+  border-radius: 10px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: var(--n300);
+  tab-size: 2;
+  white-space: pre;
+}
+
+.code-block .key { color: var(--silah); }
+.code-block .string { color: var(--tib); }
+.code-block .number { color: var(--anbar); }
+.code-block .comment { color: var(--n500); font-style: italic; }
+
+/* ═══════════════════════════════════════════
+   BADGE / CHIP
+   ═══════════════════════════════════════════ */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.badge--sahih { background: rgba(27,107,74,0.12); color: var(--zumurrud); }
+.badge--hasan { background: rgba(212,133,59,0.12); color: var(--anbar); }
+.badge--daif { background: rgba(192,57,43,0.1); color: var(--error); }
+.badge--use { background: rgba(27,107,74,0.12); color: var(--zumurrud); }
+.badge--avoid { background: rgba(192,57,43,0.1); color: var(--error); }
+.badge--precision { background: rgba(201,168,76,0.15); color: #8B7530; }
+
+/* ═══════════════════════════════════════════
+   DIVIDER — gold accent
+   ═══════════════════════════════════════════ */
+.gold-rule {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, var(--dhahab) 0%, transparent 100%);
+  margin: 3rem 0;
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+.doc-footer {
+  background: var(--bahri);
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 4vw, 3rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.doc-footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 80% at 50% 100%, rgba(201,168,76,0.06) 0%, transparent 70%);
+}
+
+.doc-footer * { position: relative; z-index: 1; }
+
+.doc-footer__three {
+  font-family: 'Outfit', sans-serif;
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--dhahab);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.doc-footer__line {
+  font-size: var(--fs-body-sm);
+  color: var(--n500);
+  margin-bottom: 0.3rem;
+}
+
+.doc-footer__arabic {
+  font-family: 'Amiri', serif;
+  font-size: 1.1rem;
+  color: var(--tib);
+  direction: rtl;
+  margin-top: 1.5rem;
+  line-height: 2;
+}
+
+.doc-footer__motto {
+  font-size: var(--fs-body-sm);
+  color: var(--dhahab);
+  font-style: italic;
+  margin-top: 1.5rem;
+}
+
+/* ═══════════════════════════════════════════
+   UTILITY
+   ═══════════════════════════════════════════ */
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-4 { margin-top: 2rem; }
+.text-gold { color: var(--dhahab); }
+.text-navy { color: var(--bahri); }
+.text-muted { color: var(--n500); }
+.fw-600 { font-weight: 600; }
+.fw-700 { font-weight: 700; }
+
+.list-clean {
+  list-style: none;
+  padding: 0;
+}
+
+.list-clean li {
+  padding: 0.4rem 0 0.4rem 1.25rem;
+  position: relative;
+  font-size: var(--fs-body-sm);
+  color: var(--n700);
+  line-height: 1.6;
+}
+
+.list-clean li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.85rem;
+  width: 6px;
+  height: 6px;
+  background: var(--dhahab);
+  border-radius: 50%;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+@media (max-width: 767px) {
+  .swatch-grid { grid-template-columns: repeat(2, 1fr); }
+  .card-grid { grid-template-columns: 1fr; }
+  .hero__inner { padding: 2.5rem 1.5rem; }
+  .main { padding: 2rem 1.25rem; }
+  table { font-size: 0.75rem; }
+  thead th, tbody td { padding: 0.5rem 0.65rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     HERO / COVER
+     ════════════════════════════════════════════ -->
+<header class="hero" id="top">
+  <div class="hero__inner">
+    <div class="hero__numeral">3</div>
+    <h1 class="hero__title">Just Three Like It</h1>
+    <p class="hero__subtitle">Unified Brand Design System for the Quranic Research Platform that makes 1,400 years of interconnected scholarship visible, navigable, and trustworthy.</p>
+    <p class="hero__arabic">فَأْتُوا بِسُورَةٍ مِّن مِّثْلِهِ</p>
+    <p class="hero__arabic-sub">Produce a surah the like thereof — Quran 2:23</p>
+    <div class="hero__meta">
+      <span class="hero__meta-item">Version <span>1.0</span></span>
+      <span class="hero__meta-item">April <span>2026</span></span>
+      <span class="hero__meta-item">BTR Marketing <span>&</span> Management</span>
+      <span class="hero__meta-item"><span>Confidential</span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════
+     LAYOUT: SIDEBAR + MAIN
+     ════════════════════════════════════════════ -->
+<div class="layout-wrapper">
+
+  <!-- SIDEBAR NAV -->
+  <aside class="sidebar">
+    <a href="#top" class="sidebar__brand">
+      <span class="sidebar__three">3</span>
+      <span class="sidebar__wordmark">J3LI System</span>
+    </a>
+    <p class="sidebar__label">Sections</p>
+    <nav>
+      <ul class="sidebar__nav">
+        <li><a href="#foundation" class="sidebar__link">01 Brand Foundation</a></li>
+        <li><a href="#voice" class="sidebar__link">02 Voice & Verbal</a></li>
+        <li><a href="#color" class="sidebar__link">03 Color System</a></li>
+        <li><a href="#typography" class="sidebar__link">04 Typography</a></li>
+        <li><a href="#spacing" class="sidebar__link">05 Spacing & Layout</a></li>
+        <li><a href="#motion" class="sidebar__link">06 Motion Design</a></li>
+        <li><a href="#logo" class="sidebar__link">07 Logo System</a></li>
+        <li><a href="#imagery" class="sidebar__link">08 Imagery</a></li>
+        <li><a href="#components" class="sidebar__link">09 Components</a></li>
+        <li><a href="#channels" class="sidebar__link">10 Channels</a></li>
+        <li><a href="#culture" class="sidebar__link">11 Cultural Context</a></li>
+        <li><a href="#behaviors" class="sidebar__link">12 Brand Behaviors</a></li>
+        <li><a href="#tokens" class="sidebar__link">13 Design Tokens</a></li>
+        <li><a href="#trends" class="sidebar__link">14 Trend Positioning</a></li>
+        <li><a href="#grammar" class="sidebar__link">15 Aesthetic Grammar</a></li>
+        <li><a href="#guardian" class="sidebar__link">16 Brand Guardian</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- ═══ 01. BRAND FOUNDATION ═══ -->
+    <section class="section" id="foundation">
+      <div class="section__header">
+        <p class="section__number">01</p>
+        <h2>Brand Foundation</h2>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Identity</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Brand Name</td><td>Just Three Like It</td></tr>
+              <tr><td>Short Name</td><td>J3LI (pronounced "jee-three-lee")</td></tr>
+              <tr><td>Handles</td><td>@just3likeit</td></tr>
+              <tr><td>Arabic Companion</td><td class="arabic-sm">فَأْتُوا بِسُورَةٍ مِّن مِّثْلِهِ — Quran 2:23</td></tr>
+              <tr><td>Category</td><td>Islamic Digital Scholarship Technology</td></tr>
+              <tr><td>Companion Line</td><td>See what's inside every verse.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Brand Essence</h3>
+        <p>The Quran is not a flat text. It is an interconnected web of meaning spanning scripture, history, language, and 1,400 years of scholarship. Just Three Like It makes that web visible, navigable, and trustworthy for the first time.</p>
+        <p>The name references the Quranic challenge (al-Tahaddi). The smallest surah, Al-Kawthar, is three verses long. In 1,400 years, the challenge stands unmet. The system shows you why.</p>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Personality Dimensions</h3>
+        <div class="card-grid">
+          <div class="card">
+            <p class="card__label">Dimension 1</p>
+            <h4 class="card__title">Scholarly Precision</h4>
+            <p class="card__body">Every word earns its place. Every claim has a source. Every citation is verifiable. Precision because the subject demands it.</p>
+          </div>
+          <div class="card">
+            <p class="card__label">Dimension 2</p>
+            <h4 class="card__title">Quiet Boldness</h4>
+            <p class="card__body">The name is a challenge. The brand does not shout. The confidence comes from the work, not from the marketing.</p>
+          </div>
+          <div class="card">
+            <p class="card__label">Dimension 3</p>
+            <h4 class="card__title">Generous Depth</h4>
+            <p class="card__body">Ask about one verse and see the hadith, the event, the scholarly debate, and the classical Arabic root. The depth is the gift.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Core Emotions</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Emotion</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Awe at Depth</td><td>A verse read a hundred times suddenly reveals layers never seen. Genuine intellectual awe when connections become visible.</td></tr>
+              <tr><td>Trust in Every Claim</td><td>Quiet confidence from seeing citations, grades, and sources on every statement. Earned trust through transparency.</td></tr>
+              <tr><td>Intellectual Hunger</td><td>The pull to click the next node, trace the next chain, explore the next root. A beautiful rabbit hole of authenticated knowledge.</td></tr>
+              <tr><td>Respect for Tradition</td><td>The system amplifies 1,400 years of scholarship rather than bypassing it. Every scholar is credited.</td></tr>
+              <tr><td>Quiet Empowerment</td><td>A key to a library you didn't know you had access to. Empowerment through the tool, not dependency on it.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Ethical Non-Negotiables</h3>
+        <ul class="list-clean">
+          <li>Never fabricate a relationship between a Hadith and a Quran verse that does not exist in authenticated scholarly sources.</li>
+          <li>Never present a Da'if (weak) hadith as evidence without stating its grade and grading scholar.</li>
+          <li>Never use AI to generate Islamic rulings, fatwas, or theological opinions.</li>
+          <li>Never market using fear, guilt, or religious manipulation.</li>
+          <li>Never compromise source authentication for user engagement.</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- ═══ 02. VOICE & VERBAL ═══ -->
+    <section class="section" id="voice">
+      <div class="section__header">
+        <p class="section__number">02</p>
+        <h2>Voice & Verbal Identity</h2>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Tone System</h3>
+
+        <h4>Precise</h4>
+        <p class="mb-1">Every word carries weight. No filler. No hedge words. If the data says it, say it clearly. If it doesn't, say that clearly too.</p>
+        <div class="tone-example tone-example--do">
+          <p class="tone-example__label">Do</p>
+          This hadith is graded Sahih by Al-Albani and Hasan by Al-Arna'ut. Both gradings and their chains are shown below.
+        </div>
+        <div class="tone-example tone-example--dont">
+          <p class="tone-example__label">Don't</p>
+          Many scholars believe this hadith is probably authentic, and it seems to be related to this verse.
+        </div>
+
+        <h4 class="mt-4">Generous</h4>
+        <p class="mb-1">Give more than asked. Show the web of connections around every search. Teach by revealing, not lecturing.</p>
+        <div class="tone-example tone-example--do">
+          <p class="tone-example__label">Do</p>
+          You searched for Ayat al-Kursi (2:255). Here is the verse, 7 tafsir interpretations, 4 connected hadith, and the root meanings of its 3 key Arabic terms.
+        </div>
+        <div class="tone-example tone-example--dont">
+          <p class="tone-example__label">Don't</p>
+          Here is the translation of 2:255.
+        </div>
+
+        <h4 class="mt-4">Reverent Without Being Reverential</h4>
+        <p class="mb-1">Respect the sacred nature of the content without performing reverence. The respect is in accuracy and depth.</p>
+        <div class="tone-example tone-example--do">
+          <p class="tone-example__label">Do</p>
+          The Prophet Muhammad instructed his companions to recite this surah before sleeping. This narration appears in Sahih Al-Bukhari, hadith 5010.
+        </div>
+        <div class="tone-example tone-example--dont">
+          <p class="tone-example__label">Don't</p>
+          The Most Noble and Blessed Prophet (Peace and Blessings of Allah Be Upon Him) in His infinite wisdom taught us...
+        </div>
+
+        <h4 class="mt-4">Inviting</h4>
+        <p class="mb-1">Pull the reader in. Hint at more depth than expected. The first sentence should make you want the second.</p>
+        <div class="tone-example tone-example--do">
+          <p class="tone-example__label">Do</p>
+          Surah Al-Kawthar is three verses long. It is also the surah scholars have written more words about, per verse, than almost any other. Here's why.
+        </div>
+        <div class="tone-example tone-example--dont">
+          <p class="tone-example__label">Don't</p>
+          Welcome to our Quranic research platform. Please use the search bar to find verses.
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Banned Vocabulary</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Banned</th><th>Reason</th></tr></thead>
+            <tbody>
+              <tr><td>Revolutionary / Game-changing / Cutting-edge</td><td>Startup hype. The Quran is 1,400 years old.</td></tr>
+              <tr><td>Halal / Shariah-compliant / Islamic (as adjectives)</td><td>Architectural facts, never selling points.</td></tr>
+              <tr><td>AI-powered (as headline)</td><td>AI is the plumbing. Knowledge is the product.</td></tr>
+              <tr><td>Simple / Easy / Just</td><td>The subject is complex. The system makes it navigable.</td></tr>
+              <tr><td>Content (for Quranic text)</td><td>Scripture, not content.</td></tr>
+              <tr><td>Users (in public copy)</td><td>Researchers, explorers, or "you."</td></tr>
+              <tr><td>Unleash / Elevate / Dive In / Master / Embrace</td><td>Permanently banned generic marketing language.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Approved Brand Vocabulary</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Term</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td>Authenticated</td><td>Not "verified" — carries the weight of isnad</td></tr>
+              <tr><td>Connections</td><td>What the system reveals (not "insights")</td></tr>
+              <tr><td>Trace</td><td>What you do with an isnad chain or root word</td></tr>
+              <tr><td>Root</td><td>Arabic trilateral root and deeper meaning</td></tr>
+              <tr><td>Grade / Graded</td><td>Hadith authentication: Sahih, Hasan, Da'if</td></tr>
+              <tr><td>Explorer / Explore</td><td>What the user does — not "consume"</td></tr>
+              <tr><td>Verse / Ayah</td><td>Never "content" or "text"</td></tr>
+              <tr><td>Classical</td><td>Classical Arabic, lexicon, scholarship</td></tr>
+              <tr><td>Navigate</td><td>Making complexity navigable</td></tr>
+              <tr><td>Reveal</td><td>Connections that were always there but invisible</td></tr>
+              <tr><td>Depth</td><td>The defining quality of the experience</td></tr>
+              <tr><td>Node</td><td>In Research Mode — the graph unit</td></tr>
+              <tr><td>Lane's Lexicon</td><td>Gold standard dictionary, named explicitly</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- ═══ 03. COLOR SYSTEM ═══ -->
+    <section class="section" id="color">
+      <div class="section__header">
+        <p class="section__number">03</p>
+        <h2>Color System</h2>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Primary Palette</h3>
+        <p>Deep navy grounds the experience. Warm gold signals illumination of understanding. White provides the breathing room precision requires.</p>
+        <div class="swatch-grid">
+          <div class="swatch">
+            <div class="swatch__color" style="background:#0A1628;"></div>
+            <div class="swatch__info"><p class="swatch__name">Bahri Blue</p><p class="swatch__hex">#0A1628</p></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background:#C9A84C;"></div>
+            <div class="swatch__info"><p class="swatch__name">Dhahab Gold</p><p class="swatch__hex">#C9A84C</p></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background:#FAFAF8; border-bottom: 1px solid #e0ddd4;"></div>
+            <div class="swatch__info"><p class="swatch__name">Noor</p><p class="swatch__hex">#FAFAF8</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Secondary Palette</h3>
+        <div class="swatch-grid">
+          <div class="swatch">
+            <div class="swatch__color" style="background:#1B6B4A;"></div>
+            <div class="swatch__info"><p class="swatch__name">Zumurrud</p><p class="swatch__hex">#1B6B4A · Sahih</p></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background:#D4853B;"></div>
+            <div class="swatch__info"><p class="swatch__name">Anbar</p><p class="swatch__hex">#D4853B · Hasan</p></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background:#2E86AB;"></div>
+            <div class="swatch__info"><p class="swatch__name">Silah</p><p class="swatch__hex">#2E86AB · Graph</p></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background:#0D1F3C;"></div>
+            <div class="swatch__info"><p class="swatch__name">Layl</p><p class="swatch__hex">#0D1F3C · Dark</p></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background:#E8D9A0;"></div>
+            <div class="swatch__info"><p class="swatch__name">Tib</p><p class="swatch__hex">#E8D9A0 · Highlight</p></div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background:#C0392B;"></div>
+            <div class="swatch__info"><p class="swatch__name">Da'if Red</p><p class="swatch__hex">#C0392B · Error</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Semantic Mapping</h3>
+        <p class="mb-1">Colors map directly to hadith authentication grades — the most critical UX signal in the system.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Grade</th><th>Color</th><th>Badge</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td>Sahih (Authentic)</td><td>Zumurrud #1B6B4A</td><td><span class="badge badge--sahih">Sahih</span></td><td>Verified connections, form success</td></tr>
+              <tr><td>Hasan (Good)</td><td>Anbar #D4853B</td><td><span class="badge badge--hasan">Hasan</span></td><td>Attention states, review needed</td></tr>
+              <tr><td>Da'if (Weak)</td><td>Error #C0392B</td><td><span class="badge badge--daif">Da'if</span></td><td>Explicit warning, form errors</td></tr>
+              <tr><td>Info (System)</td><td>Silah #2E86AB</td><td></td><td>AI-generated summaries, system notices</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Dark Mode</h3>
+        <p>Dark mode is the primary experience for the Graph Explorer. Not an inversion — a purpose-built environment for extended reading and graph navigation.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element</th><th>Light Mode</th><th>Dark Mode</th></tr></thead>
+            <tbody>
+              <tr><td>Page background</td><td>#FAFAF8 (Noor)</td><td>#0A1628 (Bahri)</td></tr>
+              <tr><td>Card surface</td><td>#FFFFFF</td><td>#0D1F3C (Layl)</td></tr>
+              <tr><td>Primary text</td><td>#111111</td><td>#FAFAF8 (Noor)</td></tr>
+              <tr><td>Gold accent</td><td>#C9A84C (Dhahab)</td><td>#E8D9A0 (Tib) — lightened</td></tr>
+              <tr><td>Node hover glow</td><td>rgba(201,168,76,0.3)</td><td>rgba(201,168,76,0.5)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- ═══ 04. TYPOGRAPHY ═══ -->
+    <section class="section" id="typography">
+      <div class="section__header">
+        <p class="section__number">04</p>
+        <h2>Typography System</h2>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Font Families</h3>
+        <p>Typography is the primary visual element. The type carries the brand before any image loads. Arabic script is primary content, not decoration.</p>
+
+        <h4 class="mt-4">Latin Stack</h4>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Role</th><th>Typeface</th><th>Weights</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td>Display + Body</td><td>Outfit (Variable)</td><td>300–800</td><td>Headlines, body, UI text</td></tr>
+              <tr><td>Mono</td><td>JetBrains Mono</td><td>400–500</td><td>Code, API refs, hadith numbers</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 class="mt-4">Arabic Stack</h4>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Role</th><th>Typeface</th><th>Weights</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td>Quranic Display</td><td>Amiri</td><td>400–700</td><td>Verse rendering, classical text, Arabic companion line</td></tr>
+              <tr><td>UI Arabic</td><td>Noto Naskh Arabic</td><td>400–700</td><td>UI labels, hadith text, tafsir content</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Type Scale</h3>
+        <p class="text-muted mb-2">Base: 16px (1rem). Scale factor: 1.25 (Major Third).</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Level</th><th>Size</th><th>Weight</th><th>Line Height</th></tr></thead>
+            <tbody>
+              <tr><td>Display Large</td><td>3.052rem / 48.83px</td><td>800</td><td>1.1</td></tr>
+              <tr><td>Display</td><td>2.441rem / 39.06px</td><td>700</td><td>1.15</td></tr>
+              <tr><td>H1</td><td>1.953rem / 31.25px</td><td>700</td><td>1.2</td></tr>
+              <tr><td>H2</td><td>1.563rem / 25px</td><td>700</td><td>1.25</td></tr>
+              <tr><td>H3</td><td>1.25rem / 20px</td><td>600</td><td>1.3</td></tr>
+              <tr><td>Body Large</td><td>1.125rem / 18px</td><td>400</td><td>1.6</td></tr>
+              <tr><td>Body</td><td>1rem / 16px</td><td>400</td><td>1.6</td></tr>
+              <tr><td>Body Small</td><td>0.875rem / 14px</td><td>400</td><td>1.5</td></tr>
+              <tr><td>Caption</td><td>0.75rem / 12px</td><td>500</td><td>1.4</td></tr>
+              <tr><td>Overline</td><td>0.625rem / 10px</td><td>600 + uppercase</td><td>1.2</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Arabic Typography Rules</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Rule</th><th>Specification</th></tr></thead>
+            <tbody>
+              <tr><td>Optical Weight</td><td>Set Arabic 10–15% smaller than Latin equivalent. Test visually.</td></tr>
+              <tr><td>Line Height</td><td>Arabic body: 1.7–1.9 (vs Latin 1.4–1.6).</td></tr>
+              <tr><td>Letter Spacing</td><td>Zero or negative only. Positive spacing destroys Arabic joining.</td></tr>
+              <tr><td>No Italics</td><td>Arabic has no italic tradition. Use weight for emphasis.</td></tr>
+              <tr><td>One Family Max</td><td>One Arabic family with weight variation. No decorative second family.</td></tr>
+              <tr><td>Amiri for Quran</td><td>All Quranic verse rendering in Amiri, Uthmani script. Non-negotiable.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- ═══ 05. SPACING ═══ -->
+    <section class="section" id="spacing">
+      <div class="section__header">
+        <p class="section__number">05</p>
+        <h2>Spacing & Layout</h2>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Spacing Scale</h3>
+        <p class="text-muted mb-2">Base unit: 4px. All values derive from multiples of 4.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td>space-1</td><td>4px</td><td>Tight internal padding, icon gaps</td></tr>
+              <tr><td>space-2</td><td>8px</td><td>Inline gaps, tag padding</td></tr>
+              <tr><td>space-4</td><td>16px</td><td>Default component padding</td></tr>
+              <tr><td>space-6</td><td>24px</td><td>Section gaps within cards</td></tr>
+              <tr><td>space-8</td><td>32px</td><td>Card gaps, between components</td></tr>
+              <tr><td>space-12</td><td>48px</td><td>Section boundaries</td></tr>
+              <tr><td>space-16</td><td>64px</td><td>Major section separators</td></tr>
+              <tr><td>space-24</td><td>96px</td><td>Page-level section spacing</td></tr>
+              <tr><td>space-32</td><td>128px</td><td>Hero vertical padding</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Shadow Elevation</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Level</th><th>Value</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td>elevation-0</td><td>none</td><td>Flat elements, inline text</td></tr>
+              <tr><td>elevation-1</td><td>0 1px 3px rgba(10,22,40,0.08)</td><td>Cards, panels</td></tr>
+              <tr><td>elevation-2</td><td>0 4px 12px rgba(10,22,40,0.12)</td><td>Hover cards, search results</td></tr>
+              <tr><td>elevation-3</td><td>0 8px 24px rgba(10,22,40,0.16)</td><td>Modals, overlays</td></tr>
+              <tr><td>glow-gold</td><td>0 0 12px rgba(201,168,76,0.3)</td><td>Authenticated node, active verse</td></tr>
+              <tr><td>glow-blue</td><td>0 0 16px rgba(46,134,171,0.3)</td><td>Graph connection hover</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">RTL Layout Architecture</h3>
+        <p>RTL is a co-equal layout system built from Phase 0, not a CSS toggle applied at the end.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Rule</th><th>Specification</th></tr></thead>
+            <tbody>
+              <tr><td>Direction</td><td>dir="rtl" on root. Use logical CSS properties (margin-inline-start, padding-inline-end).</td></tr>
+              <tr><td>Icon Mirroring</td><td>Directional icons mirror. Non-directional do not.</td></tr>
+              <tr><td>Numbers</td><td>Remain LTR within RTL flow. Western Arabic numerals for digital UI.</td></tr>
+              <tr><td>Graph Explorer</td><td>Direction-agnostic (spatial). Panels and menus mirror. Timeline reads right-to-left.</td></tr>
+              <tr><td>Bilingual</td><td>Arabic right half, Latin left half. Each primary for its reader.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- ═══ 06. MOTION ═══ -->
+    <section class="section" id="motion">
+      <div class="section__header">
+        <p class="section__number">06</p>
+        <h2>Motion Design System</h2>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Motion Principles</h3>
+        <p>Motion serves meaning. The graph explorer's vocabulary — nodes expanding, connections tracing, depth revealing — is the brand's motion signature.</p>
+        <div class="card-grid">
+          <div class="card"><h4 class="card__title">Reveals connections</h4><p class="card__body">Connected nodes animate outward. Motion shows the system finding relationships.</p></div>
+          <div class="card"><h4 class="card__title">Communicates depth</h4><p class="card__body">Layers emerge with staggered timing. Deepest information arrives last.</p></div>
+          <div class="card"><h4 class="card__title">Respects the content</h4><p class="card__body">Quranic text never animates character-by-character. It appears complete.</p></div>
+          <div class="card"><h4 class="card__title">Is earned</h4><p class="card__body">First visit: full animations. Return visits: reduced. The system remembers.</p></div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Easing & Duration</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td>ease-default</td><td class="mono">cubic-bezier(0.4, 0, 0.2, 1)</td><td>Standard transitions</td></tr>
+              <tr><td>ease-enter</td><td class="mono">cubic-bezier(0, 0, 0.2, 1)</td><td>Elements entering view</td></tr>
+              <tr><td>ease-graph</td><td class="mono">cubic-bezier(0.34, 1.56, 0.64, 1)</td><td>Graph node expansion, knowledge reveal</td></tr>
+              <tr><td>ease-spring</td><td class="mono">cubic-bezier(0.175, 0.885, 0.32, 1.275)</td><td>Interactive feedback</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-wrap mt-2">
+          <table>
+            <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+            <tbody>
+              <tr><td>duration-instant</td><td>100ms</td><td>Hover, color changes</td></tr>
+              <tr><td>duration-fast</td><td>200ms</td><td>Buttons, toggles</td></tr>
+              <tr><td>duration-normal</td><td>300ms</td><td>Card transitions, tabs</td></tr>
+              <tr><td>duration-slow</td><td>500ms</td><td>Modal entrance, node expansion</td></tr>
+              <tr><td>duration-cinematic</td><td>1200ms</td><td>First-visit hero, graph entrance</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- ═══ 07. LOGO ═══ -->
+    <section class="section" id="logo">
+      <div class="section__header">
+        <p class="section__number">07</p>
+        <h2>Logo System</h2>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Logo Concept</h3>
+        <p>The numeral "3" is the logo's geometric identity. Three verses, three-ness as the irreducible unit of the challenge. The "3" is the visual anchor — the first thing the eye finds.</p>
+        <h4 class="mt-4">Primary Mark</h4>
+        <p>"JUST THREE LIKE IT" in Outfit 700, with the "3" at 150% scale in Dhahab gold. The rest in Bahri navy or reversed white.</p>
+        <h4 class="mt-4">Icon Mark</h4>
+        <p>Isolated "3" for favicon, app icon, small-scale. Gold on navy, or navy on white. At 16px, only the 3 appears.</p>
+        <h4 class="mt-4">Arabic Wordmark</h4>
+        <p class="arabic-display mb-1">فَأْتُوا بِسُورَةٍ مِّن مِّثْلِهِ</p>
+        <p class="text-muted">Set in Amiri. Not a translation — the Quranic source. Both lockups are primary, equal in weight and authority.</p>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection__title">Placement Rules</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Context</th><th>Rule</th></tr></thead>
+            <tbody>
+              <tr><td>Clearspace</td><td>Minimum = x-height of wordmark, all sides</td></tr>
+              <tr><td>Website header</td><td>Top-left (LTR), top-right (RTL). Mandatory mirror.</td></tr>
+              <tr><td>Digital minimum</td><td>80px (full logo), 24px (icon mark)</td></tr>
+              <tr><td>Print minimum</td><td>25mm wide</td></tr>
+              <tr><td>Maximum</td><td>30% of container width</td></tr>
+              <tr><td>On photography</td><td>White reversed + optional shadow. Icon-only on complex backgrounds.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- ═══ 08. IMAGERY ═══ -->
+    <section class="section" id="imagery">
+      <div class="section__header">
+        <p class="section__number">08</p>
+        <h2>Imagery & Visual Direction</h2>
+      </div>
+      <div class="subsection">
+        <h3 class="subsection__title">Visual Language</h3>
+        <p>The visual language is the graph itself — nodes, connections, depth, illumination. Arabic calligraphy in Amiri is the visual hero when the graph is not present. A verse rendered with care IS the image.</p>
+        <h4 class="mt-4">Prohibited Imagery</h4>
+        <ul class="list-clean">
+          <li>No generic Islamic imagery (mosque silhouettes, crescent moons, stereotypical patterns)</li>
+          <li>No stock photography of posed "diverse Muslims"</li>
+          <li>No Quranic text as decorative backgrounds or watermarks</li>
+          <li>No depiction of prophets, angels, or companions</li>
+          <li>No music in audio/video — ambient sound or silence only</li>
+          <li>No Tech Bro Gradient (purple-blue-teal) — no exceptions</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- ═══ 09. COMPONENTS ═══ -->
+    <section class="section" id="components">
+      <div class="section__header">
+        <p class="section__number">09</p>
+        <h2>Component Library</h2>
+      </div>
+      <p class="mb-3">Every component specified in both LTR and RTL. All meet WCAG AA accessibility standards.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Component</th><th>J3LI Variants</th><th>Key Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Button</td><td>Primary / Secondary / Ghost / Icon-only</td><td>Primary: Dhahab bg, navy text</td></tr>
+            <tr><td>Search Input</td><td>Verse search, hadith search, root search</td><td>Primary CTA. Arabic placeholder text.</td></tr>
+            <tr><td>Verse Card</td><td>Inline, Card, Full-page</td><td>Amiri font. Uthmani script. Word Explorer on tap.</td></tr>
+            <tr><td>Hadith Card</td><td>Default, Expanded</td><td>Grade badge always visible. Narrator chain expandable.</td></tr>
+            <tr><td>Tafsir Card</td><td>Default, Comparative</td><td>Scholar name prominent. Multiple positions shown.</td></tr>
+            <tr><td>Graph Node</td><td>Verse, Hadith, Scholar, Event, Root, Narrator</td><td>Each type has distinct shape. Gold glow on selection.</td></tr>
+            <tr><td>Grade Badge</td><td><span class="badge badge--sahih">Sahih</span> <span class="badge badge--hasan">Hasan</span> <span class="badge badge--daif">Da'if</span></td><td>Non-negotiable visibility on every hadith reference.</td></tr>
+            <tr><td>Modal</td><td>Verse Detail, Hadith Chain, Root Explorer</td><td>Verse Detail is the conversion-critical component.</td></tr>
+            <tr><td>Toast</td><td>Success, Error, Warning, Info</td><td>Info for "no direct scholarly link found" messages.</td></tr>
+            <tr><td>Navigation</td><td>Desktop, Mobile, Graph Sidebar</td><td>Graph sidebar is the most complex component.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- ═══ 10. CHANNELS ═══ -->
+    <section class="section" id="channels">
+      <div class="section__header">
+        <p class="section__number">10</p>
+        <h2>Channel Templates</h2>
+      </div>
+      <div class="subsection">
+        <h3 class="subsection__title">Content Pillars</h3>
+        <div class="card-grid">
+          <div class="card"><p class="card__label">Pillar 1 · 50%</p><h4 class="card__title">"Did You Know?" — Connection Reveals</h4><p class="card__body">Single surprising connections. Root word breakdowns. Graph screenshots. Gold accent on navy.</p></div>
+          <div class="card"><p class="card__label">Pillar 2 · 20%</p><h4 class="card__title">"Trace The Chain" — Isnad Deep Dives</h4><p class="card__body">Visual isnad breakdowns. Authentication walkthroughs. Linear chain visualisation.</p></div>
+          <div class="card"><p class="card__label">Pillar 3 · 15%</p><h4 class="card__title">"The Word Behind The Word"</h4><p class="card__body">Root explorations. Translation vs classical meaning comparisons. Arabic typography hero.</p></div>
+          <div class="card"><p class="card__label">Pillar 4 · 15%</p><h4 class="card__title">"Building J3LI" — Behind The System</h4><p class="card__body">Architecture decisions. Embedding benchmarks. Open-source progress. Code-forward.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- ═══ 11. CULTURE ═══ -->
+    <section class="section" id="culture">
+      <div class="section__header">
+        <p class="section__number">11</p>
+        <h2>Cultural Context</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Value</th><th>Brand Application</th></tr></thead>
+          <tbody>
+            <tr><td>Adab (أدب)</td><td>Never presents opinions without attribution. Does not rank scholars. Presents; does not judge.</td></tr>
+            <tr><td>Isnad Consciousness</td><td>Every data point traces to its source. A cultural value the Muslim tradition invented.</td></tr>
+            <tr><td>Ikhtilaf (اختلاف)</td><td>When scholars differ, ALL authenticated positions are presented.</td></tr>
+            <tr><td>Tawadu' (تواضع)</td><td>The system serves the knowledge. Technology is the vessel, not the message.</td></tr>
+            <tr><td>Haya' (حياء)</td><td>No flashy marketing. No aggressive conversion. The depth IS the marketing.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- ═══ 12. BEHAVIORS ═══ -->
+    <section class="section" id="behaviors">
+      <div class="section__header">
+        <p class="section__number">12</p>
+        <h2>Brand Behaviors</h2>
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0;">
+        <div>
+          <h4 style="color:var(--zumurrud); margin-bottom:0.75rem;">Always</h4>
+          <ul class="list-clean">
+            <li>Cite the source on every claim</li>
+            <li>State the authenticity grade for every hadith</li>
+            <li>Present multiple scholarly opinions when they exist</li>
+            <li>Use classical Arabic definitions from Lane's Lexicon</li>
+            <li>Say "no direct scholarly link found" when data doesn't support a claim</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color:var(--error); margin-bottom:0.75rem;">Never</h4>
+          <ul class="list-clean">
+            <li>Use startup hype vocabulary</li>
+            <li>Imply the system replaces scholars</li>
+            <li>State Shariah compliance as marketing</li>
+            <li>Use religious guilt or fear as engagement</li>
+            <li>Present AI synthesis as scholarly consensus</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- ═══ 13. TOKENS ═══ -->
+    <section class="section" id="tokens">
+      <div class="section__header">
+        <p class="section__number">13</p>
+        <h2>Design Token Reference</h2>
+      </div>
+      <p class="mb-2">The contract between design and engineering. Every value traces to a documented decision.</p>
+      <div class="code-block">{
+  <span class="key">"color"</span>: {
+    <span class="key">"brand"</span>: {
+      <span class="key">"primary"</span>: <span class="string">"#0A1628"</span>,
+      <span class="key">"secondary"</span>: <span class="string">"#C9A84C"</span>,
+      <span class="key">"tertiary"</span>: <span class="string">"#2E86AB"</span>,
+      <span class="key">"background"</span>: <span class="string">"#FAFAF8"</span>
+    },
+    <span class="key">"semantic"</span>: {
+      <span class="key">"success"</span>: <span class="string">"#1B6B4A"</span>,  <span class="comment">// Sahih</span>
+      <span class="key">"warning"</span>: <span class="string">"#D4853B"</span>,  <span class="comment">// Hasan</span>
+      <span class="key">"error"</span>: <span class="string">"#C0392B"</span>,    <span class="comment">// Da'if</span>
+      <span class="key">"info"</span>: <span class="string">"#2E86AB"</span>      <span class="comment">// System</span>
+    }
+  },
+  <span class="key">"typography"</span>: {
+    <span class="key">"latin"</span>: { <span class="key">"display"</span>: <span class="string">"Outfit"</span>, <span class="key">"mono"</span>: <span class="string">"JetBrains Mono"</span> },
+    <span class="key">"arabic"</span>: { <span class="key">"display"</span>: <span class="string">"Amiri"</span>, <span class="key">"body"</span>: <span class="string">"Noto Naskh Arabic"</span> }
+  },
+  <span class="key">"motion"</span>: {
+    <span class="key">"easing"</span>: {
+      <span class="key">"default"</span>: <span class="string">"cubic-bezier(0.4, 0, 0.2, 1)"</span>,
+      <span class="key">"graph"</span>: <span class="string">"cubic-bezier(0.34, 1.56, 0.64, 1)"</span>
+    },
+    <span class="key">"duration"</span>: {
+      <span class="key">"fast"</span>: <span class="string">"200ms"</span>,
+      <span class="key">"normal"</span>: <span class="string">"300ms"</span>,
+      <span class="key">"cinematic"</span>: <span class="string">"1200ms"</span>
+    }
+  }
+}</div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- ═══ 14. TRENDS ═══ -->
+    <section class="section" id="trends">
+      <div class="section__header">
+        <p class="section__number">14</p>
+        <h2>2026 Trend Positioning</h2>
+      </div>
+      <p class="mb-3">Evaluated against J3LI brand strategy. Enforced during all visual work. Reassessed annually.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Trend</th><th>Verdict</th><th>Rule</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Barely There UI</td><td><span class="badge badge--precision">Precision</span></td><td>Adopt discipline, not the cold clinical identity.</td></tr>
+            <tr><td>2</td><td>Maximalism</td><td><span class="badge badge--precision">Precision</span></td><td>One gesture per page against restrained foundation.</td></tr>
+            <tr><td>3</td><td>The Human Touch</td><td><span class="badge badge--use">Use</span></td><td>One deliberate human element per touchpoint.</td></tr>
+            <tr><td>4</td><td>Grade School Palettes</td><td><span class="badge badge--precision">Precision</span></td><td>One warm, unexpected accent. Never fighting the primary.</td></tr>
+            <tr><td>5</td><td>Spaceship Manual</td><td><span class="badge badge--precision">Precision</span></td><td>Schematic language for graph explorer and isnad chains only.</td></tr>
+            <tr><td>6</td><td>Democratized Animation</td><td><span class="badge badge--precision">Precision</span></td><td>Only if it communicates what static cannot.</td></tr>
+            <tr><td>7</td><td>Internet Nostalgia</td><td><span class="badge badge--avoid">Avoid</span></td><td>GCC audiences lack the reference. Generates confusion.</td></tr>
+            <tr><td>8</td><td>Sonic Interaction</td><td><span class="badge badge--precision">Precision</span></td><td>Opt-in only. Must match brand tone. Never auto-play.</td></tr>
+            <tr><td>9</td><td>Tech Bro Gradient</td><td><span class="badge badge--avoid">Avoid</span></td><td>No purple-blue-teal. Ever. The clearest avoid verdict.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- ═══ 15. GRAMMAR ═══ -->
+    <section class="section" id="grammar">
+      <div class="section__header">
+        <p class="section__number">15</p>
+        <h2>Aesthetic Intelligence Grammar</h2>
+      </div>
+      <p class="mb-3">Ten permanent principles. Trend verdicts change; the grammar does not.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Principle</th><th>J3LI Application</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Typographic Dominance</td><td>Display type carries the brand before images load. Search interface is type-first.</td></tr>
+            <tr><td>2</td><td>Color Restraint</td><td>Max 3 active colors. Navy, gold, white dominate. Additional colors are functional.</td></tr>
+            <tr><td>3</td><td>Cinematic Photography</td><td>The graph visualisation IS the cinematic moment.</td></tr>
+            <tr><td>4</td><td>White Space as Tool</td><td>Verse detail page gives each element room. No crowding.</td></tr>
+            <tr><td>5</td><td>Motion as Signal</td><td>Node animations communicate interconnected knowledge.</td></tr>
+            <tr><td>6</td><td>Unambiguous Hierarchy</td><td>Homepage: search bar. Verse page: the verse in Amiri. Eye is directed.</td></tr>
+            <tr><td>7</td><td>Restraint = Credibility</td><td>Authentication pipeline proves expertise through precision, not decoration.</td></tr>
+            <tr><td>8</td><td>Product as Hero</td><td>Knowledge graph presented with the reverence of isolated product photography.</td></tr>
+            <tr><td>9</td><td>System Visibility</td><td>Gold "3", navy depth, Amiri Arabic — the logic is visible in the work.</td></tr>
+            <tr><td>10</td><td>Copy Economy</td><td>"See what's inside every verse." Six words. Every word chosen.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- ═══ 16. GUARDIAN ═══ -->
+    <section class="section" id="guardian">
+      <div class="section__header">
+        <p class="section__number">16</p>
+        <h2>Brand Guardian Prompt</h2>
+      </div>
+      <p class="mb-2">Deployed across all AI agents producing J3LI content or visual output.</p>
+      <div class="code-block" style="background:var(--bahri); border-left: 3px solid var(--dhahab);"><span class="comment">// ROLE</span>
+Become the J3LI brand. Every output must feel like it came from inside.
+
+<span class="comment">// BEFORE GENERATING</span>
+Internalise: scholarly precision, quiet boldness, generous depth.
+Identify: banned vocabulary, authentication-first, Amiri for Quranic text.
+
+<span class="comment">// AESTHETIC GRAMMAR TEST (before every visual output)</span>
+1. Is type the primary visual element?
+2. Does the palette demonstrate restraint — max 3 active colors?
+3. Is there one clear focal point?
+4. Does white space feel like confidence?
+5. Has every word earned its place?
+
+<span class="comment">// ARABIC RULE</span>
+Every asset has an Arabic version. Not translation — fresh expression.
+Native speaker review before production.
+
+<span class="comment">// BANNED</span>
+Default AI language. Startup hype. Religious guilt. Generic Islamic imagery.
+Tech Bro Gradient. Content that could belong to any other brand.</div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════ -->
+<footer class="doc-footer">
+  <div class="doc-footer__three">3</div>
+  <p class="doc-footer__line" style="color:var(--noor); font-weight:600;">Just Three Like It</p>
+  <p class="doc-footer__line">Unified Brand Design System · Version 1.0 · April 2026</p>
+  <p class="doc-footer__line">A BTR Marketing & Management Production</p>
+  <p class="doc-footer__arabic">فَأْتُوا بِسُورَةٍ مِّن مِّثْلِهِ</p>
+  <p class="doc-footer__motto">Feel First. See Next. Specify. Build. Deploy.</p>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     SCROLL ANIMATIONS + ACTIVE NAV
+     ═══════════════════════════════════════════ -->
+<script>
+// Intersection Observer for section fade-in
+const sections = document.querySelectorAll('.section');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+sections.forEach(s => observer.observe(s));
+
+// Active sidebar link tracking
+const navLinks = document.querySelectorAll('.sidebar__link');
+const sectionIds = Array.from(navLinks).map(l => l.getAttribute('href').slice(1));
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(l => {
+        l.classList.toggle('sidebar__link--active', l.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' });
+
+sectionIds.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) navObserver.observe(el);
+});
+</script>
+
+</body>
+</html>

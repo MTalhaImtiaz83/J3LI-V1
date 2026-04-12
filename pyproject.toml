@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "j3li"
+version = "0.1.0"
+description = "Just Three Like It — Quranic Research System combining Knowledge Graph and Vector Search"
+authors = ["Muhammad Talha Imtiaz <mtalha.imtiaz2010@gmail.com>"]
+readme = "README.md"
+packages = [{include = "j3li"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.0"
+uvicorn = {extras = ["standard"], version = "^0.32.0"}
+neo4j = "^5.25.0"
+pymilvus = "^2.4.0"
+sentence-transformers = "^3.3.0"
+pydantic = "^2.10.0"
+pydantic-settings = "^2.6.0"
+httpx = "^0.28.0"
+python-dotenv = "^1.0.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.0"
+pytest-asyncio = "^0.24.0"
+pytest-cov = "^6.0.0"
+httpx = "^0.28.0"
+ruff = "^0.8.0"
+
+[tool.poetry.scripts]
+j3li-ingest = "j3li.ingestion.cli:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
